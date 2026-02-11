@@ -1,0 +1,100 @@
+[
+  {
+    "id": "sale-apartment-detailed",
+    "title": "Оголошення про продаж квартири",
+    "description": "Детальний опис для продажу квартири на ринку нерухомості.",
+    "category": "sale",
+    "tags": ["apartment", "detailed", "city"],
+    "inputFields": [
+      { "id": "propertyType", "label": "Тип нерухомості", "type": "text", "required": true },
+      { "id": "district", "label": "Район", "type": "text", "required": true },
+      { "id": "area", "label": "Площа (м²)", "type": "number", "required": true },
+      { "id": "bedrooms", "label": "Кількість кімнат", "type": "number", "required": false },
+      { "id": "keyFeatures", "label": "Ключові переваги", "type": "textarea", "required": false }
+    ],
+    "previewText": "Простора та світла квартира у престижному районі міста з продуманим плануванням та якісним ремонтом."
+  },
+  {
+    "id": "rent-apartment-long-term",
+    "title": "Оголошення про оренду квартири",
+    "description": "Шаблон для швидкого та зрозумілого оголошення про довгострокову оренду.",
+    "category": "rent",
+    "tags": ["apartment", "rent", "long-term"],
+    "inputFields": [
+      { "id": "location", "label": "Локація", "type": "text", "required": true },
+      { "id": "monthlyPrice", "label": "Орендна плата/місяць", "type": "number", "required": true },
+      { "id": "utilities", "label": "Комунальні платежі", "type": "text", "required": false },
+      { "id": "furniture", "label": "Меблі та техніка", "type": "textarea", "required": false }
+    ],
+    "previewText": "Затишна квартира для довгострокової оренди в зручній локації поруч із транспортом і необхідною інфраструктурою."
+  },
+  {
+    "id": "sale-house-family",
+    "title": "Продаж приватного будинку",
+    "description": "Професійний текст для продажу будинку з акцентом на ділянку та планування.",
+    "category": "sale",
+    "tags": ["house", "sale", "family"],
+    "inputFields": [
+      { "id": "houseArea", "label": "Площа будинку (м²)", "type": "number", "required": true },
+      { "id": "landArea", "label": "Площа ділянки (сотки)", "type": "number", "required": true },
+      { "id": "floors", "label": "Кількість поверхів", "type": "number", "required": false },
+      { "id": "communications", "label": "Комунікації", "type": "textarea", "required": false }
+    ],
+    "previewText": "Сучасний приватний будинок із доглянутою територією, зручним плануванням та всіма необхідними комунікаціями."
+  },
+  {
+    "id": "rent-house-suburb",
+    "title": "Оренда будинку",
+    "description": "Шаблон для презентації будинку в оренду для сім'ї або компанії.",
+    "category": "rent",
+    "tags": ["house", "rent", "suburb"],
+    "inputFields": [
+      { "id": "term", "label": "Термін оренди", "type": "text", "required": true },
+      { "id": "rooms", "label": "Кількість кімнат", "type": "number", "required": false },
+      { "id": "yard", "label": "Подвір'я та зона відпочинку", "type": "textarea", "required": false },
+      { "id": "parking", "label": "Паркомісця", "type": "number", "required": false }
+    ],
+    "previewText": "Комфортний будинок в оренду з просторими кімнатами, приватним подвір'ям та зручним заїздом для авто."
+  },
+  {
+    "id": "sale-commercial-business",
+    "title": "Комерційне приміщення для продажу",
+    "description": "Опис для продажу офісу, магазину чи салону з фокусом на бізнес-переваги.",
+    "category": "commercial",
+    "tags": ["commercial", "sale", "business"],
+    "inputFields": [
+      { "id": "businessType", "label": "Тип приміщення", "type": "text", "required": true },
+      { "id": "footTraffic", "label": "Трафік локації", "type": "text", "required": false },
+      { "id": "ceilingHeight", "label": "Висота стелі", "type": "number", "required": false },
+      { "id": "condition", "label": "Стан приміщення", "type": "textarea", "required": false }
+    ],
+    "previewText": "Комерційне приміщення у прохідній локації, що чудово підходить для стабільного розвитку бізнесу."
+  },
+  {
+    "id": "rent-commercial-office",
+    "title": "Комерційне приміщення в оренду",
+    "description": "Швидкий шаблон для оголошення про оренду бізнес-приміщення.",
+    "category": "commercial",
+    "tags": ["commercial", "rent", "office"],
+    "inputFields": [
+      { "id": "rentalRate", "label": "Ставка оренди", "type": "number", "required": true },
+      { "id": "minTerm", "label": "Мінімальний термін", "type": "text", "required": false },
+      { "id": "infrastructure", "label": "Інфраструктура поруч", "type": "textarea", "required": false }
+    ],
+    "previewText": "Функціональне комерційне приміщення в оренду з вигідною ставкою та зручним доступом для клієнтів."
+  },
+  {
+    "id": "social-short-cta",
+    "title": "Короткий опис об'єкта для соцмереж",
+    "description": "Лаконічний формат для Instagram, Facebook і Telegram з чітким закликом до дії.",
+    "category": "sale",
+    "tags": ["social", "short", "cta"],
+    "inputFields": [
+      { "id": "objectName", "label": "Назва об'єкта", "type": "text", "required": true },
+      { "id": "mainBenefit", "label": "Головна перевага", "type": "text", "required": true },
+      { "id": "price", "label": "Ціна", "type": "number", "required": false },
+      { "id": "callToAction", "label": "Заклик до дії", "type": "text", "required": false }
+    ],
+    "previewText": "Новий об'єкт на ринку: стильний, зручний і готовий до перегляду вже сьогодні. Пишіть у direct!"
+  }
+]

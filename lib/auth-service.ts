@@ -7,10 +7,12 @@ import {
 import { doc, serverTimestamp, setDoc } from "firebase/firestore"
 
 import { getFirebaseAuth, getFirebaseDb } from "@/lib/firebase/config"
+import { DEFAULT_SUBSCRIPTION, type UserSubscription } from "@/lib/subscription-service"
 
 export type User = {
   uid: string
   email: string | null
+  subscription?: UserSubscription
 }
 
 function mapUser(user: { uid: string; email: string | null }): User {
@@ -42,6 +44,7 @@ export async function register(
 
     await setDoc(doc(db, "users", user.uid), {
       email: user.email,
+      subscription: DEFAULT_SUBSCRIPTION,
       createdAt: serverTimestamp(),
     })
 

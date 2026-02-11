@@ -1,0 +1,18 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#f8fafc" />
+  <rect x="48" y="40" width="1184" height="64" rx="14" fill="#ffffff" stroke="#e2e8f0" />
+  <rect x="48" y="128" width="1184" height="64" rx="14" fill="#ffffff" stroke="#e2e8f0" />
+  <rect x="48" y="220" width="572" height="430" rx="16" fill="#ffffff" stroke="#e2e8f0" />
+  <rect x="660" y="220" width="572" height="430" rx="16" fill="#ffffff" stroke="#e2e8f0" />
+  <rect x="86" y="270" width="500" height="42" rx="10" fill="#eef2ff" />
+  <rect x="86" y="334" width="500" height="42" rx="10" fill="#eef2ff" />
+  <rect x="86" y="398" width="500" height="100" rx="10" fill="#eef2ff" />
+  <rect x="86" y="522" width="500" height="46" rx="12" fill="#4f46e5" />
+  <rect x="698" y="270" width="496" height="220" rx="12" fill="#f1f5f9" />
+  <rect x="698" y="516" width="160" height="40" rx="10" fill="#ffffff" stroke="#cbd5e1" />
+  <rect x="874" y="516" width="180" height="40" rx="10" fill="#ffffff" stroke="#cbd5e1" />
+  <rect x="1070" y="516" width="124" height="40" rx="10" fill="#4f46e5" />
+  <text x="48" y="692" fill="#475569" font-family="Inter, Arial, sans-serif" font-size="24">
+    Constructor mock screenshot
+  </text>
+</svg>

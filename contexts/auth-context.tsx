@@ -12,12 +12,18 @@ import {
 import { onAuthStateChanged } from "firebase/auth"
 
 import {
+  type UserSubscription,
+  DEFAULT_SUBSCRIPTION,
+  mapSubscription,
+} from "@/lib/subscription-service"
+import { doc, getDoc } from "firebase/firestore"
+import {
   login as authLogin,
   logout as authLogout,
   register as authRegister,
   type User,
 } from "@/lib/auth-service"
-import { getFirebaseAuth } from "@/lib/firebase/config"
+import { getFirebaseAuth, getFirebaseDb } from "@/lib/firebase/config"
 
 type AuthContextValue = {
   user: User | null
@@ -25,6 +31,7 @@ type AuthContextValue = {
   login: (email: string, password: string) => Promise<User | null>
   register: (email: string, password: string) => Promise<User | null>
   logout: () => Promise<void>
+  refreshUser: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined)
@@ -43,11 +50,38 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
+  const loadUserSubscription = useCallback(
+    async (uid: string): Promise<UserSubscription> => {
+      const db = getFirebaseDb()
+      const snapshot = await getDoc(doc(db, "users", uid))
+      if (!snapshot.exists()) {
+        return DEFAULT_SUBSCRIPTION
+      }
+
+      const data = snapshot.data() as { subscription?: unknown }
+      return mapSubscription(data.subscription)
+    },
+    []
+  )
+
   useEffect(() => {
     const auth = getFirebaseAuth()
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
-        setUser({ uid: firebaseUser.uid, email: firebaseUser.email })
+        try {
+          const subscription = await loadUserSubscription(firebaseUser.uid)
+          setUser({
+            uid: firebaseUser.uid,
+            email: firebaseUser.email,
+            subscription,
+          })
+        } catch {
+          setUser({
+            uid: firebaseUser.uid,
+            email: firebaseUser.email,
+            subscription: DEFAULT_SUBSCRIPTION,
+          })
+        }
       } else {
         setUser(null)
       }
@@ -55,7 +89,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     })
 
     return unsubscribe
-  }, [])
+  }, [loadUserSubscription])
 
   const login = useCallback((email: string, password: string) => {
     return authLogin(email, password)
@@ -69,6 +103,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return authLogout()
   }, [])
 
+  const refreshUser = useCallback(async () => {
+    if (!user?.uid) {
+      return
+    }
+
+    try {
+      const subscription = await loadUserSubscription(user.uid)
+      setUser((prev) =>
+        prev
+          ? {
+              ...prev,
+              subscription,
+            }
+          : prev
+      )
+    } catch {
+      // Keep existing user state when profile refresh fails.
+    }
+  }, [loadUserSubscription, user?.uid])
+
   const value = useMemo(
     () => ({
       user,
@@ -76,8 +130,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       login,
       register,
       logout,
+      refreshUser,
     }),
-    [user, isLoading, login, register, logout]
+    [user, isLoading, login, register, logout, refreshUser]
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

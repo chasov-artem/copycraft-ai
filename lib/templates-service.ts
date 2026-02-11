@@ -13,8 +13,9 @@ import { db } from "@/lib/firebase/config"
 export type TemplateInputField = {
   id: string
   label: string
-  type: string
-  required?: boolean
+  type: "text" | "textarea" | "number"
+  placeholder?: string
+  required: boolean
 }
 
 export type TemplateData = {

@@ -1,23 +1,47 @@
 # CopyCraft AI
 
-Next.js 14 проект з TypeScript, Tailwind CSS, App Router та shadcn/ui компонентами.
+![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-Auth%20%26%20Firestore-orange?logo=firebase)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-06b6d4?logo=tailwindcss&logoColor=white)
+![Payments](https://img.shields.io/badge/Stripe%2FPaddle-Mock%20Mode-7c3aed)
 
-## Технології
+SaaS MVP для рієлторів: генерація маркетингових текстів для нерухомості через динамічні шаблони, з auth, бібліотекою шаблонів, конструктором і demo-білінгом.
 
-- **Next.js 14** - React фреймворк з App Router
-- **TypeScript** - типізація коду
-- **Tailwind CSS** - утилітарний CSS фреймворк
-- **shadcn/ui** - бібліотека компонентів (стиль: New York, колір: Slate)
+**Live Demo:** https://copycraft-ai.vercel.app  
+**Repository:** https://github.com/chasov-artem/copycraft-ai
 
-## Встановлені компоненти shadcn/ui
+## Архітектура
 
-- Button
-- Card
-- Input
-- Label
-- Badge
-- Skeleton
-- Tabs
+Проект побудований на **Next.js App Router**, стан користувача та сесії працює через **React Context**, дані зберігаються в **Firestore**, а платежі реалізовано як **mock-сервіс**, що імітує Stripe/Paddle checkout + webhook flow для MVP-демо.
+
+- **Frontend:** Next.js 14, TypeScript, Tailwind CSS, shadcn/ui, framer-motion
+- **Auth/Data:** Firebase Auth + Firestore
+- **Billing:** Mock payment service (`checkout`, `subscription`, `webhook`)
+- **Routing:** App Router (`app/`)
+
+## Скріншоти
+
+### Лендінг
+
+![Landing](./public/screenshots/landing.svg)
+
+### Бібліотека шаблонів
+
+![Templates Library](./public/screenshots/templates-library.svg)
+
+### Конструктор
+
+![Builder](./public/screenshots/builder.svg)
+
+## Ключові фічі
+
+- Лендінг з тарифами і CTA
+- Реєстрація/логін через Firebase Auth
+- Бібліотека шаблонів з фільтрами за категоріями, тегами та пошуком
+- Конструктор шаблону з динамічними полями і mock AI-генерацією
+- Demo checkout + subscription billing + webhook
+- Адаптивний UI і мікроанімації
 
 ## Локальний запуск
 
@@ -27,84 +51,53 @@ Next.js 14 проект з TypeScript, Tailwind CSS, App Router та shadcn/ui �
 npm install
 ```
 
-2. Запустіть dev сервер:
+2. Заповніть `.env.local`:
+
+```bash
+NEXT_PUBLIC_FIREBASE_API_KEY=...
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=...
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=...
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=...
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=...
+NEXT_PUBLIC_FIREBASE_APP_ID=...
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=...
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+
+3. (Опційно) засійте шаблони:
+
+```bash
+npm run seed:templates
+```
+
+4. Запустіть проект:
 
 ```bash
 npm run dev
 ```
 
-3. Відкрийте [http://localhost:3000](http://localhost:3000) у браузері
+5. Відкрийте `http://localhost:3000`.
+
+## Payment Implementation (Mock)
+
+У проекті реалізовано повний demo-цикл SaaS-оплати без зовнішніх платіжних SDK:
+
+- `lib/mock-payment-service.ts`
+  - `createCheckoutSession(priceId, userId)`
+  - `verifyPayment(sessionId)`
+  - `cancelSubscription(userId)`
+- `app/checkout/page.tsx` — старт checkout
+- `app/checkout/mock-session/[sessionId]/page.tsx` — форма оплати з Luhn-валідацією
+- `app/api/mock-webhook/route.ts` — імітація `checkout.session.completed`
+- `app/dashboard/billing/page.tsx` — керування підпискою
+- `lib/subscription-service.ts` — синхронізація статусу підписки в Firestore
+
+Це дозволяє показати архітектуру production SaaS ще до інтеграції реального провайдера.
 
 ## Деплой на Vercel
 
-### Через GitHub інтеграцію (рекомендовано)
-
-1. **Створіть репозиторій на GitHub:**
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin https://github.com/ВАШ_ЮЗЕРНЕЙМ/copycraft-ai.git
-   git push -u origin main
-   ```
-
-2. **Підключіть проект до Vercel:**
-   - Перейдіть на [vercel.com](https://vercel.com)
-   - Увійдіть через GitHub
-   - Натисніть "Add New Project"
-   - Виберіть репозиторій `copycraft-ai`
-   - Vercel автоматично визначить Next.js проект
-   - Натисніть "Deploy"
-
-3. **Після деплою:**
-   - Vercel надасть вам URL типу: `https://copycraft-ai.vercel.app`
-   - Кожен push до `main` гілки автоматично запускає новий деплой
-
-### Через Vercel CLI
-
-1. Встановіть Vercel CLI:
-   ```bash
-   npm i -g vercel
-   ```
-
-2. Задеплойте проект:
-   ```bash
-   vercel
-   ```
-
-3. Для production деплою:
-   ```bash
-   vercel --prod
-   ```
-
-## Структура проекту
-
-```
-copycraft-ai/
-├── app/                    # App Router директорія
-│   ├── globals.css        # Глобальні стилі з Tailwind та shadcn/ui
-│   ├── layout.tsx         # Кореневий layout
-│   └── page.tsx           # Головна сторінка
-├── components/             # React компоненти
-│   └── ui/                # shadcn/ui компоненти
-├── lib/                   # Утиліти
-│   └── utils.ts           # Допоміжні функції
-├── components.json        # Конфігурація shadcn/ui
-├── tailwind.config.ts     # Конфігурація Tailwind CSS
-├── tsconfig.json          # Конфігурація TypeScript
-└── package.json           # Залежності проекту
-```
-
-## Додавання нових компонентів shadcn/ui
-
 ```bash
-npx shadcn@latest add [назва-компонента]
+vercel --prod
 ```
 
-## Додаткові ресурси
-
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [shadcn/ui Documentation](https://ui.shadcn.com)
-- [Vercel Documentation](https://vercel.com/docs)
+Після деплою додайте env-змінні у Vercel Project Settings -> Environment Variables.

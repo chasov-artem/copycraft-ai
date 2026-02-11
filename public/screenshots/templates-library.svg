@@ -1,0 +1,18 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#f8fafc" />
+  <rect x="48" y="40" width="1184" height="90" rx="16" fill="#ffffff" stroke="#e2e8f0" />
+  <rect x="80" y="74" width="360" height="20" rx="8" fill="#0f172a" />
+  <rect x="1000" y="66" width="200" height="36" rx="10" fill="#4f46e5" />
+  <rect x="48" y="156" width="1184" height="82" rx="16" fill="#ffffff" stroke="#e2e8f0" />
+  <g fill="#ffffff" stroke="#e2e8f0">
+    <rect x="48" y="266" width="370" height="180" rx="16" />
+    <rect x="455" y="266" width="370" height="180" rx="16" />
+    <rect x="862" y="266" width="370" height="180" rx="16" />
+    <rect x="48" y="470" width="370" height="180" rx="16" />
+    <rect x="455" y="470" width="370" height="180" rx="16" />
+    <rect x="862" y="470" width="370" height="180" rx="16" />
+  </g>
+  <text x="48" y="692" fill="#475569" font-family="Inter, Arial, sans-serif" font-size="24">
+    Templates library mock screenshot
+  </text>
+</svg>

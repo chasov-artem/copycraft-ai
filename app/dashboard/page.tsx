@@ -1,16 +1,20 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import Link from "next/link"
+import { motion } from "framer-motion"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 
 import { FilterPanel, type TemplateFilters } from "@/components/dashboard/filter-panel"
 import { TemplateCard } from "@/components/dashboard/template-card"
 import { useAuth } from "@/contexts/auth-context"
 import { Button } from "@/components/ui/button"
+import { Skeleton } from "@/components/ui/skeleton"
 import { getAllTemplates, type TemplateRecord } from "@/lib/templates-service"
 
 export default function DashboardPage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const { user, logout } = useAuth()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [templates, setTemplates] = useState<TemplateRecord[]>([])
@@ -22,6 +26,8 @@ export default function DashboardPage() {
     tags: [],
     searchTerm: "",
   })
+
+  const isPaymentSuccess = searchParams.get("success") === "true"
 
   async function handleLogout() {
     setIsSubmitting(true)
@@ -100,11 +106,36 @@ export default function DashboardPage() {
           </Button>
         </div>
 
+        {isPaymentSuccess && (
+          <motion.div
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-700"
+          >
+            Підписка Pro активована успішно. Дякуємо за оплату!
+          </motion.div>
+        )}
+
+        <div className="flex justify-end">
+          <Button asChild variant="outline">
+            <Link href="/dashboard/billing">Billing</Link>
+          </Button>
+        </div>
+
         <FilterPanel templates={templates} onFilterChange={setFilters} />
 
         {isLoading && (
-          <div className="rounded-lg border border-slate-200 bg-white p-6 text-sm text-slate-600">
-            Завантаження шаблонів...
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <div key={index} className="rounded-lg border border-slate-200 bg-white p-4">
+                <Skeleton className="mb-3 h-5 w-1/3" />
+                <Skeleton className="mb-3 h-6 w-3/4" />
+                <Skeleton className="mb-2 h-4 w-full" />
+                <Skeleton className="mb-2 h-4 w-11/12" />
+                <Skeleton className="h-9 w-full" />
+              </div>
+            ))}
           </div>
         )}
 
@@ -122,8 +153,8 @@ export default function DashboardPage() {
 
         {!isLoading && !error && filteredTemplates.length > 0 && (
           <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {filteredTemplates.map((template) => (
-              <TemplateCard key={template.id} template={template} />
+            {filteredTemplates.map((template, index) => (
+              <TemplateCard key={template.id} template={template} index={index} />
             ))}
           </section>
         )}

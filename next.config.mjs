@@ -1,6 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  generateBuildId: () => null,
-};
+const nextConfig = {};
 
 export default nextConfig;

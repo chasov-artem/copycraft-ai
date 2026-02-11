@@ -15,6 +15,8 @@ SaaS MVP для рієлторів: генерація маркетингови�
 
 Проект побудований на **Next.js App Router**, стан користувача та сесії працює через **React Context**, дані зберігаються в **Firestore**, а платежі реалізовано як **mock-сервіс**, що імітує Stripe/Paddle checkout + webhook flow для MVP-демо.
 
+Початковий стек проекту: **Next 13 + TypeScript + Tailwind + shadcn/ui** (поточна версія — Next.js 14).
+
 - **Frontend:** Next.js 14, TypeScript, Tailwind CSS, shadcn/ui, framer-motion
 - **Auth/Data:** Firebase Auth + Firestore
 - **Billing:** Mock payment service (`checkout`, `subscription`, `webhook`)

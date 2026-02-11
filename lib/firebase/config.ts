@@ -30,3 +30,5 @@ export function getFirebaseAuth() {
 export function getFirebaseDb() {
   return getFirestore(getFirebaseApp())
 }
+
+export const db = getFirebaseDb()

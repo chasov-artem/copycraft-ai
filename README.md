@@ -8,7 +8,7 @@
 
 SaaS MVP для рієлторів: генерація маркетингових текстів для нерухомості через динамічні шаблони, з auth, бібліотекою шаблонів, конструктором і demo-білінгом.
 
-**Live Demo:** https://copycraft-ai.vercel.app  
+**Live Demo:** https://copycraft-ai.chasov-dev.com/
 **Repository:** https://github.com/chasov-artem/copycraft-ai
 
 ## Архітектура

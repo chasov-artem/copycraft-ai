@@ -1,11 +1,5 @@
 # CopyCraft AI
 
-![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript&logoColor=white)
-![Firebase](https://img.shields.io/badge/Firebase-Auth%20%26%20Firestore-orange?logo=firebase)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-06b6d4?logo=tailwindcss&logoColor=white)
-![Payments](https://img.shields.io/badge/Stripe%2FPaddle-Mock%20Mode-7c3aed)
-
 SaaS MVP для рієлторів: генерація маркетингових текстів для нерухомості через динамічні шаблони, з auth, бібліотекою шаблонів, конструктором і demo-білінгом.
 
 **Live Demo:** https://copycraft-ai.chasov-dev.com/
@@ -21,20 +15,6 @@ SaaS MVP для рієлторів: генерація маркетингови�
 - **Auth/Data:** Firebase Auth + Firestore
 - **Billing:** Mock payment service (`checkout`, `subscription`, `webhook`)
 - **Routing:** App Router (`app/`)
-
-## Скріншоти
-
-### Лендінг
-
-![Landing](./public/screenshots/landing.svg)
-
-### Бібліотека шаблонів
-
-![Templates Library](./public/screenshots/templates-library.svg)
-
-### Конструктор
-
-![Builder](./public/screenshots/builder.svg)
 
 ## Ключові фічі
 
